@@ -35,19 +35,13 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(routes)
 
-// If that above routes didnt work, we 404 them and forward to error handler
+// Global Error Handler
 app.use(errorHandlers.notFound)
-
-// One of our error handlers will see if these errors are just validation errors
 app.use(errorHandlers.flashValidationErrors)
-
-// Otherwise this was a really bad error we didn't expect! Shoot eh
 app.use(errorHandlers.developmentErrors)
-
-// production error handler
 // app.use(errorHandlers.productionErrors)
 
-const db = mongoose.connect('mongodb://root:root@ds127883.mlab.com:27883/graphql', { useMongoClient: true })
+const db = mongoose.connect('[mongo string]', { useMongoClient: true }) // TODO: Add String
 
 app.listen(4000, () => {
   console.info('⚡️  Express server started on port 4000.\n')
